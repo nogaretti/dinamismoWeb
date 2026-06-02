@@ -4,6 +4,7 @@ let postsGlobal = [];
 let usersGlobal = [];
 let postEditando = null;
 const limite = 10;
+let criandoNovoPost = false;
 
 async function buscarRota(url) {
     const res = await fetch(url);
