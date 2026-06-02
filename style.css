@@ -194,6 +194,8 @@ nav h2 {
 }
 
 .btn-editar,
+.btn-salvar,
+.btn-cancelar,
 .btn-excluir{
     width: 36px;
     height: 36px;
@@ -212,6 +214,16 @@ nav h2 {
 }
 
 .btn-excluir:hover {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.btn-salvar:hover {
+    background: #e9fee2;
+    color: #44dc26;
+}
+
+.btn-cancelar:hover {
     background: #fee2e2;
     color: #dc2626;
 }
