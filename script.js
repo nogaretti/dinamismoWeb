@@ -48,12 +48,14 @@ function renderizarPosts(paginaAtual) {
                 "<h3>" + userName + "</h3>" +
                 "<div>" + post.body + "</div>" +
                 "<br>" +
+                "<div class='acoes'>" +
                 "<button onclick='editarPost(" + post.id + ")'>" +
                     "Editar" +
                 "</button>" +
                 "<button onclick='excluirPost(" + post.id + ")'>" +
                     "Excluir" +
                 "</button>" +
+                "</div>"
             "</div>";
     }
 }
