@@ -18,7 +18,7 @@ async function buscarPostUsers() {
     const limite = 10;
 
     renderizarPosts(1);
-    
+
     const quantidadeTelas = Math.ceil(postsGlobal.length / limite);
     for (let y = 1; y <= quantidadeTelas; y++){
         document.getElementById("paginas").innerHTML += "<button onclick='renderizarPosts(" + y + ")'>" + y + "</button>";
@@ -98,4 +98,3 @@ function editarPost(id) {
         renderizarPosts(1);
     }
 }
-
