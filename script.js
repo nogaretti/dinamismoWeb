@@ -2,6 +2,8 @@ const urlAPI = "https://jsonplaceholder.typicode.com";
 
 let postsGlobal = [];
 let usersGlobal = [];
+let postEditando = null;
+const limite = 10;
 
 async function buscarRota(url) {
     const res = await fetch(url);
@@ -15,11 +17,13 @@ async function buscarPostUsers() {
 
     usersGlobal = await buscarRota(urlAPI + "/users");
     postsGlobal = await buscarRota(urlAPI + "/posts");
-    const limite = 10;
 
     renderizarPosts(1);
+}
 
+function atualizarTelas(){
     const quantidadeTelas = Math.ceil(postsGlobal.length / limite);
+    document.getElementById("paginas").innerHTML = ""
     for (let y = 1; y <= quantidadeTelas; y++){
         document.getElementById("paginas").innerHTML += "<button onclick='renderizarPosts(" + y + ")'>" + y + "</button>";
     }
@@ -27,7 +31,6 @@ async function buscarPostUsers() {
 
 function renderizarPosts(paginaAtual) {
     const elemento = document.getElementById("elemento");
-    const limite = 10;
 
     let inicio = (paginaAtual - 1) * limite;
     let fim = inicio + limite;
@@ -42,61 +45,119 @@ function renderizarPosts(paginaAtual) {
         );
 
         const userName = userCarac.username;
-        elemento.innerHTML +=
-            "<div class='card'>" +
-                "<h2>" + post.title + "</h2>" +
-                "<h3>" + userName + "</h3>" +
-                "<div>" + post.body + "</div>" +
-                "<br>" +
-                "<div class='acoes'>" +
-                "<button class='btn-editar' onclick='editarPost(" + post.id + ")'>" +
-                    "<i class='fa-solid fa-pen'></i>" +
-                "</button>" +
-                "<button class='btn-excluir' onclick='excluirPost(" + post.id + ")'>" +
-                    "<i class='fa-solid fa-trash'></i>" +
-                "</button>"
-                "</div>"
-            "</div>";
+
+        if (postEditando === post.id){
+            elemento.innerHTML += `
+                <div class="card">
+                    <h2 
+                        contenteditable="true"
+                        class="editando"
+                        id="titulo-${post.id}"
+                    >
+                        ${post.title}
+                    </h2>
+
+                    <h3>${userName}</h3>
+
+                    <div 
+                        contenteditable="true"
+                        class="editando"
+                        id="conteudo-${post.id}"
+                    >
+                        ${post.body}
+                    </div>
+
+                    <div class="acoes">
+                        <button
+                            class="btn-salvar"
+                            onclick="salvarPost(${post.id}, ${paginaAtual})"
+                        >
+                            <i class="fa-solid fa-check"></i>
+                        </button>
+                        <button
+                            class="btn-cancelar"
+                            onclick="cancelarAcao(${post.id}, ${paginaAtual})"
+                        >
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }else{
+            elemento.innerHTML += `
+                <div class="card">
+                    <h2 id="titulo-${post.id}">
+                        ${post.title}
+                    </h2>
+
+                    <h3>${userName}</h3>
+
+                    <div id="conteudo-${post.id}">
+                        ${post.body}
+                    </div>
+
+                    <div class="acoes">
+                        <button
+                            class="btn-editar"
+                            onclick="editarPost(${post.id}, ${paginaAtual})"
+                        >
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button
+                            class="btn-excluir"
+                            onclick="excluirPost(${post.id}, ${paginaAtual})"
+                        >
+                            <i class='fa-solid fa-trash'></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+    atualizarTelas();
+}
+
+function excluirPost(id, paginaAtual) {
+    const resposta = confirm("Você deseja apagar esse post?");
+    if (resposta) {
+        postsGlobal = postsGlobal.filter(
+            post => post.id !== id
+        );
+        renderizarPosts(paginaAtual);
     }
 }
 
-buscarPostUsers();
-
-function excluirPost(id) {
-    alert("Você deseja apagar esse post?")
-    postsGlobal = postsGlobal.filter(
-        post => post.id !== id
-    );
-
-    renderizarPosts(1);
+function editarPost(id, paginaAtual) {
+    postEditando = id;
+    renderizarPosts(paginaAtual);
 }
 
-function editarPost(id) {
+function cancelarAcao(id, paginaAtual){
+    postEditando = null;
+    renderizarPosts(paginaAtual);
+}
 
+function salvarPost(id, paginaAtual){
     const post = postsGlobal.find(
         p => p.id === id
     );
 
-    const novoTitulo = prompt(
-        "Novo título:",
-        post.title
-    );
-
-    const novoConteudo = prompt(
-        "Novo conteúdo:",
-        post.body
-    );
+    const novoTitulo = document.getElementById(`titulo-${id}`).textContent;
+    const novoConteudo = document.getElementById(`conteudo-${id}`).textContent;
 
     if (
         novoTitulo !== null &&
-        novoUsername !== null &&
         novoConteudo !== null
     ) {
+        post.title =
+        document.getElementById(`titulo-${id}`).innerText;
+        post.body =
+        document.getElementById(`conteudo-${id}`).innerText;
 
-        post.title = novoTitulo;
-        post.username = novoUsername;
-        post.body = novoConteudo;
-
-        renderizarPosts(1);
+        postEditando = null;
+        renderizarPosts(paginaAtual);
     }
 }
+
+buscarPostUsers();

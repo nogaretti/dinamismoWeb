@@ -185,7 +185,6 @@ nav h2 {
     display: none;
 }
 
-/* ─── AÇÕES ─── */
 .acoes {
     display: flex;
     gap: 8px;
@@ -257,4 +256,15 @@ footer button:hover {
     font-size: 12px;
     font-weight: 600;
     margin-bottom: 14px;
+}
+
+.editando {
+    outline: 2px solid #3b82f6;
+    border-radius: 6px;
+    background-color: #f8fbff;
+    padding: 4px;
+}
+
+.editando:focus {
+    outline: 2px solid #2563eb;
 }
