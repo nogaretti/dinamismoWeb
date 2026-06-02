@@ -1,23 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    />
-    <title>Chamada API</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+    <title>Blog API</title>
 </head>
 <body>
     <nav>
-        <h2>Posts da API</h2>
-        <button id="novoPost">Novo Post</button>
+        <div class="logo">
+            <i class="fa-solid fa-feather"></i>
+            <h2>Blog API</h2>
+        </div>
+
+        <button id="novoPost">
+            <i class="fa-solid fa-plus"></i>
+            Novo Post
+        </button>
     </nav>
 
+    <header class="hero">
+        <span class="hero-badge"><i class="fa-solid fa-rss"></i> não atualiza se não quiser perder os registros criados rsrsr</span>
+        <h1>Posts</h1>
+        <p>Blog com posts puxados da API localmente.</p>
+    </header>
+
     <section class="posts">
-        <h1> Posts </h1>
         <div id="elemento"></div>
         <script src="script.js"></script>
     </section>
