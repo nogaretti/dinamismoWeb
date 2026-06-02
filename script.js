@@ -160,5 +160,80 @@ function salvarPost(id, paginaAtual){
         renderizarPosts(paginaAtual);
     }
 }
-
+document.getElementById("novoPost").addEventListener("click", function() {
+    if (criandoNovoPost) return;
+ 
+    criandoNovoPost = true;
+    postEditando = null;
+ 
+    const opcoesUsuarios = usersGlobal
+        .map(u => `<option value="${u.id}">${u.username}</option>`)
+        .join("");
+ 
+    const elemento = document.getElementById("elemento");
+ 
+    const card = document.createElement("div");
+    card.className = "card";
+    card.id = "card-novo-post";
+    card.innerHTML = `
+        <h2
+            contenteditable="true"
+            class="editando"
+            id="titulo-novo"
+        ></h2>
+ 
+        <select id="usuario-novo">
+            ${opcoesUsuarios}
+        </select>
+ 
+        <div
+            contenteditable="true"
+            class="editando"
+            id="conteudo-novo"
+        ></div>
+ 
+        <div class="acoes">
+            <button class="btn-salvar" onclick="confirmarNovoPost()">
+                <i class="fa-solid fa-check"></i>
+            </button>
+            <button class="btn-cancelar" onclick="cancelarNovoPost()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+    `;
+ 
+    elemento.insertBefore(card, elemento.firstChild);
+    document.getElementById("titulo-novo").focus();
+});
+ 
+function confirmarNovoPost() {
+    const titulo = document.getElementById("titulo-novo").innerText.trim();
+    const conteudo = document.getElementById("conteudo-novo").innerText.trim();
+    const userId = parseInt(document.getElementById("usuario-novo").value);
+ 
+    if (!titulo || !conteudo) {
+        alert("Preencha o título e o conteúdo antes de salvar.");
+        return;
+    }
+ 
+    const maiorId = postsGlobal.reduce((max, p) => p.id > max ? p.id : max, 0);
+ 
+    const novoPost = {
+        id: maiorId + 1,
+        userId: userId,
+        title: titulo,
+        body: conteudo,
+    };
+ 
+    postsGlobal.unshift(novoPost);
+    criandoNovoPost = false;
+    renderizarPosts(1);
+}
+ 
+function cancelarNovoPost() {
+    criandoNovoPost = false;
+    const card = document.getElementById("card-novo-post");
+    if (card) card.remove();
+}
+ 
 buscarPostUsers();
