@@ -15,26 +15,33 @@ async function buscarPostUsers() {
 
     usersGlobal = await buscarRota(urlAPI + "/users");
     postsGlobal = await buscarRota(urlAPI + "/posts");
+    const limite = 10;
 
-    renderizarPosts();
+    renderizarPosts(1);
+    
+    const quantidadeTelas = Math.ceil(postsGlobal.length / limite);
+    for (let y = 1; y <= quantidadeTelas; y++){
+        document.getElementById("paginas").innerHTML += "<button onclick='renderizarPosts(" + y + ")'>" + y + "</button>";
+    }
 }
 
-function renderizarPosts() {
-
+function renderizarPosts(paginaAtual) {
     const elemento = document.getElementById("elemento");
+    const limite = 10;
+
+    let inicio = (paginaAtual - 1) * limite;
+    let fim = inicio + limite;
+    let postsRegistrados = 0;
 
     elemento.innerHTML = "";
-
-    for (let i = 0; i < postsGlobal.length; i++) {
-
-        const post = postsGlobal[i];
+    for (inicio; inicio < fim; inicio++) {
+        const post = postsGlobal[inicio];
 
         const userCarac = usersGlobal.find(
             u => u.id === post.userId
         );
 
         const userName = userCarac.username;
-
         elemento.innerHTML +=
             "<div class='card'>" +
                 "<h2>" + post.title + "</h2>" +
@@ -51,13 +58,15 @@ function renderizarPosts() {
     }
 }
 
-function excluirPost(id) {
+buscarPostUsers();
 
+function excluirPost(id) {
+    alert("Você deseja apagar esse post?")
     postsGlobal = postsGlobal.filter(
         post => post.id !== id
     );
 
-    renderizarPosts();
+    renderizarPosts(1);
 }
 
 function editarPost(id) {
@@ -69,11 +78,6 @@ function editarPost(id) {
     const novoTitulo = prompt(
         "Novo título:",
         post.title
-    );
-
-    const novoUsername = prompt(
-        "Novo nome de usuário:",
-        post.username
     );
 
     const novoConteudo = prompt(
@@ -91,8 +95,7 @@ function editarPost(id) {
         post.username = novoUsername;
         post.body = novoConteudo;
 
-        renderizarPosts();
+        renderizarPosts(1);
     }
 }
 
-buscarPostUsers();

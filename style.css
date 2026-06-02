@@ -25,3 +25,10 @@ body {
     margin-top: 0;
     margin-bottom: 12px;
 }
+
+footer{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    vertical-align: auto;
+}
