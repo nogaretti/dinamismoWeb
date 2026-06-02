@@ -49,12 +49,12 @@ function renderizarPosts(paginaAtual) {
                 "<div>" + post.body + "</div>" +
                 "<br>" +
                 "<div class='acoes'>" +
-                "<button onclick='editarPost(" + post.id + ")'>" +
-                    "Editar" +
+                "<button class='btn-editar' onclick='editarPost(" + post.id + ")'>" +
+                    "<i class='fa-solid fa-pen'></i>" +
                 "</button>" +
-                "<button onclick='excluirPost(" + post.id + ")'>" +
-                    "Excluir" +
-                "</button>" +
+                "<button class='btn-excluir' onclick='excluirPost(" + post.id + ")'>" +
+                    "<i class='fa-solid fa-trash'></i>" +
+                "</button>"
                 "</div>"
             "</div>";
     }

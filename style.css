@@ -1,16 +1,17 @@
-body {
-    background-color: #f4f6f8;
+body{
+    background: #f8fafc;
     font-family: Arial, sans-serif;
-    color: #333;
+    color: #1f2937;
 }
 
-nav {
-    background-color: white;
-    padding: 20px 40px;
+nav{
+    background: white;
+    height: 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    padding: 0 40px;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 nav h2{
@@ -18,20 +19,17 @@ nav h2{
 }
 
 #novoPost{
-    background-color: #3498db;
+    background: #111827;
     color: white;
-
     border: none;
-    border-radius: 6px;
-
-    padding: 10px 18px;
-
+    border-radius: 8px;
+    padding: 10px 16px;
     cursor: pointer;
+    font-weight: 600;
 }
 
 #novoPost:hover{
-    transition: 0.2s;
-    background-color: #2980b9;
+    background: #1f2937;
 }
 
 .posts{
@@ -46,16 +44,17 @@ nav h2{
 
 
 .card{
-    background-color: white;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
     padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 16px;
+    transition: all 0.2s ease;
 }
 
 .card:hover{
-    transition: 0.2s;
-    background-color: rgb(238, 238, 238);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
 }
 
 .card h2{
@@ -66,10 +65,57 @@ nav h2{
 
 .card h3{
     font-size: 13px;
-    color: #888;
-    margin-bottom: 15px;
+    color: #6b7280;
+    font-weight: normal;
 }
 
 .card p{
     line-height: 1.6;
+}
+
+footer{
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 30px 0;
+}
+
+footer button{
+    width: 40px;
+    height: 40px;
+
+    border: 1px solid #e5e7eb;
+    background: white;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+footer button:hover{
+    background: #111827;
+    color: white;
+}
+
+.btn-editar,
+.btn-excluir{
+    width: 38px;
+    height: 38px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #f3f4f6;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.btn-editar:hover{
+    background: #dbeafe;
+}
+
+.btn-excluir:hover{
+    background: #fee2e2;
 }
