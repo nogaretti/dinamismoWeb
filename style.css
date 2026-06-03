@@ -292,6 +292,7 @@ footer button:hover {
 
 select#opcoesUsuarios {
     appearance: none;
+    margin-bottom: 3%;
     -webkit-appearance: none;
     width: 100%;
     max-width: 320px;

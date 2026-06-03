@@ -189,7 +189,7 @@ document.getElementById("novoPost").addEventListener("click", function() {
             id="titulo-novo"
         ></h2>
  
-        <select id="usuario-novo">
+        <select id="opcoesUsuarios">
             ${opcoesUsuarios}
         </select>
  
@@ -216,7 +216,7 @@ document.getElementById("novoPost").addEventListener("click", function() {
 function confirmarNovoPost() {
     const titulo = document.getElementById("titulo-novo").innerText.trim();
     const conteudo = document.getElementById("conteudo-novo").innerText.trim();
-    const userId = parseInt(document.getElementById("usuario-novo").value);
+    const userId = parseInt(document.getElementById("opcoesUsuarios").value);
  
     if (!titulo || !conteudo) {
         alert("Preencha o título e o conteúdo antes de salvar.");
