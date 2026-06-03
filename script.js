@@ -22,11 +22,18 @@ async function buscarPostUsers() {
     renderizarPosts(1);
 }
 
-function atualizarTelas(){
+function atualizarTelas(paginaAtual){
     const quantidadeTelas = Math.ceil(postsGlobal.length / limite);
     document.getElementById("paginas").innerHTML = ""
     for (let y = 1; y <= quantidadeTelas; y++){
-        document.getElementById("paginas").innerHTML += "<button onclick='renderizarPosts(" + y + ")'>" + y + "</button>";
+        console.log(y);
+        document.getElementById("paginas").innerHTML += `
+        <button
+            class="btn-pages ${y === paginaAtual ? "active" : ""}" 
+            onclick="renderizarPosts(${y})">
+            ${y} 
+        </button>
+        `;
     }
 }
 
@@ -116,7 +123,7 @@ function renderizarPosts(paginaAtual) {
         }
     }
 
-    atualizarTelas();
+    atualizarTelas(paginaAtual);
 }
 
 function excluirPost(id, paginaAtual) {

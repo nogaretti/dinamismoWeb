@@ -228,6 +228,15 @@ nav h2 {
     color: #dc2626;
 }
 
+.btn-pages {
+    background-color: white;
+}
+
+.btn-pages.active {
+    background-color: #2563eb;
+    color: white;
+}
+
 footer {
     display: flex;
     justify-content: center;
