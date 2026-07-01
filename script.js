@@ -25,7 +25,21 @@ async function buscarPostUsers() {
 
     renderizarPosts(1);
 }
+function obterListaFiltrada() {
+    let lista = postsGlobal.filter(
+        post => post.title.toLowerCase().includes(termoBusca.toLowerCase())
+    );
 
+    if (ordenacaoAtual === "recentes") {
+        lista = lista.slice().sort((a, b) => b.id - a.id);
+    } else if (ordenacaoAtual === "antigos") {
+        lista = lista.slice().sort((a, b) => a.id - b.id);
+    } else if (ordenacaoAtual === "az") {
+        lista = lista.slice().sort((a, b) => a.title.localeCompare(b.title));
+    }
+
+    return lista;
+}
 function atualizarTelas(paginaAtual){
     const quantidadeTelas = Math.ceil(postsGlobal.length / limite);
     document.getElementById("paginas").innerHTML = ""
