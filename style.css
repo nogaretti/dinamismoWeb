@@ -475,3 +475,13 @@ footer button:active {
     font-size: 0.875rem;
     cursor: pointer;
 }
+#carregando {
+    text-align: center;
+    color: #8c8a85;
+    font-size: 0.9rem;
+    padding: 40px 0;
+}
+
+#carregando.oculto {
+    display: none;
+}
