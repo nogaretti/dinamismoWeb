@@ -143,7 +143,7 @@ function renderizarPosts(paginaAtual) {
 
     atualizarTelas(paginaAtual);
 }
-
+document.getElementById("contadorPosts").textContent = `${listaFiltrada.length} posts`;
 function excluirPost(id, paginaAtual) {
     const resposta = confirm("Você deseja apagar esse post?");
     if (resposta) {
