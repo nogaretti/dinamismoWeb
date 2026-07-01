@@ -425,3 +425,12 @@ footer button:active {
         transform: none;
     }
 }
+#contadorPosts {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #6b8299;
+    background: rgba(107, 130, 153, 0.12);
+    padding: 3px 10px;
+    border-radius: 999px;
+    margin-left: 4px;
+}
