@@ -190,17 +190,16 @@ function salvarPost(id, paginaAtual){
     const novoTitulo = document.getElementById(`titulo-${id}`).textContent;
     const novoConteudo = document.getElementById(`conteudo-${id}`).textContent;
 
-    if (
-        novoTitulo !== null &&
-        novoConteudo !== null
-    ) {
-        post.title =
-        document.getElementById(`titulo-${id}`).innerText;
-        post.body =
-        document.getElementById(`conteudo-${id}`).innerText;
+    if (!novoTitulo || !novoConteudo) {
+        alert("Preencha o título e o conteúdo antes de salvar.");
+        return;
+    }
+        
+    post.title = novoTitulo;
+    post.body = novoConteudo;
 
-        postEditando = null;
-        renderizarPosts(paginaAtual);
+    postEditando = null;
+    renderizarPosts(paginaAtual);
     }
 }
 document.getElementById("novoPost").addEventListener("click", function() {
