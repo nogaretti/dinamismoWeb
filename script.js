@@ -5,6 +5,10 @@ let usersGlobal = [];
 let postEditando = null;
 const limite = 10;
 let criandoNovoPost = false;
+let termoBusca = "";
+let ordenacaoAtual = "recentes";
+let ultimoExcluido = null;
+let timeoutToast = null;
 
 async function buscarRota(url) {
     const res = await fetch(url);
@@ -15,7 +19,7 @@ async function buscarRota(url) {
 }
 
 async function buscarPostUsers() {
-
+    document.getElementById("carregando").classList.remove("oculto")
     usersGlobal = await buscarRota(urlAPI + "/users");
     postsGlobal = await buscarRota(urlAPI + "/posts");
 
