@@ -347,3 +347,57 @@ select#opcoesUsuarios:focus-visible {
 footer button:active {
     transform: scale(0.96);
 }
+.btn-editar,
+.btn-excluir,
+.btn-salvar,
+.btn-cancelar {
+    position: relative;
+}
+
+.btn-editar::after,
+.btn-excluir::after,
+.btn-salvar::after,
+.btn-cancelar::after {
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #242424;
+    color: #e8e6e1;
+    font-size: 11px;
+    font-family: 'Inter', sans-serif;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s;
+    z-index: 10;
+}
+
+.btn-editar::after {
+    content: 'Editar post';
+}
+
+.btn-excluir::after {
+    content: 'Excluir post';
+}
+
+.btn-salvar::after {
+    content: 'Salvar';
+}
+
+.btn-cancelar::after {
+    content: 'Cancelar';
+}
+
+.btn-editar:hover::after,
+.btn-excluir:hover::after,
+.btn-salvar:hover::after,
+.btn-cancelar:hover::after,
+.btn-editar:focus-visible::after,
+.btn-excluir:focus-visible::after,
+.btn-salvar:focus-visible::after,
+.btn-cancelar:focus-visible::after {
+    opacity: 1;
+}
