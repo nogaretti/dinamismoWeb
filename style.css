@@ -410,3 +410,18 @@ footer button:active {
     content: 'Conteúdo do post';
     color: #8c8a85;
 }
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    #novoPost:active,
+    .btn-editar:active,
+    .btn-excluir:active,
+    .btn-salvar:active,
+    .btn-cancelar:active,
+    footer button:active {
+        transform: none;
+    }
+}
