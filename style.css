@@ -327,3 +327,70 @@ select#opcoesUsuarios option {
     color: #1e293b;
     background: #ffffff;
 }
+
+#toast-container{
+    position:fixed;
+    top:20px;
+    right:20px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    z-index:9999;
+}
+
+.toast{
+    min-width:320px;
+    background:white;
+    border-left:6px solid;
+    border-radius:12px;
+    box-shadow:0 15px 35px black (0,0,0,.15);
+    display:flex;
+    align-items:center;
+    padding:16px;
+    transform:translateX(120%);
+    transition:.35s;
+}
+
+.toast.show{
+    transform:translateX(0);
+}
+
+.toast i:first-child{
+    font-size:22px;
+    margin-right:12px;
+}
+
+.toast.success{
+    border-color:green;
+}
+
+.toast.success i:first-child{
+    color:green;
+}
+
+.toast.error{
+    border-color:red;
+}
+
+.toast.error i:first-child{
+    color:red;
+}
+
+.toast.info{
+    border-color:blue;
+}
+
+.toast.info i:first-child{
+    color:blue;
+}
+
+.toast p{
+    flex:1;
+    font-size:.92rem;
+    font-weight:600;
+}
+
+.toast .fechar{
+    cursor:pointer;
+    color:grey;
+}

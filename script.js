@@ -6,6 +6,41 @@ let postEditando = null;
 const limite = 10;
 let criandoNovoPost = false;
 
+function mostrarToast(tipo,mensagem){
+
+    const container=document.getElementById("toast-container");
+
+    let icone="fa-circle-info";
+
+    if(tipo==="success") icone="fa-circle-check";
+    if(tipo==="error") icone="fa-circle-xmark";
+    if(tipo==="info") icone="fa-pen";
+
+    const toast=document.createElement("div");
+
+    toast.className=`toast ${tipo}`;
+
+    toast.innerHTML=`
+        <i class="fa-solid ${icone}"></i>
+        <p>${mensagem}</p>
+        <i class="fa-solid fa-xmark fechar"></i>
+    `;
+
+    container.appendChild(toast);
+
+    requestAnimationFrame(()=>toast.classList.add("show"));
+
+    function fechar(){
+        toast.classList.remove("show");
+        setTimeout(()=>toast.remove(),300);
+    }
+
+    toast.querySelector(".fechar").onclick=fechar;
+
+    setTimeout(fechar,3000);
+
+}
+
 async function buscarRota(url) {
     const res = await fetch(url);
 
@@ -133,6 +168,7 @@ function excluirPost(id, paginaAtual) {
             post => post.id !== id
         );
         renderizarPosts(paginaAtual);
+        mostrarToast("error","Post excluído com sucesso!");
     }
 }
 
@@ -165,6 +201,7 @@ function salvarPost(id, paginaAtual){
 
         postEditando = null;
         renderizarPosts(paginaAtual);
+        mostrarToast("info","Post atualizado com sucesso!");
     }
 }
 document.getElementById("novoPost").addEventListener("click", function() {
@@ -219,7 +256,7 @@ function confirmarNovoPost() {
     const userId = parseInt(document.getElementById("opcoesUsuarios").value);
  
     if (!titulo || !conteudo) {
-        alert("Preencha o título e o conteúdo antes de salvar.");
+        mostrarToast("error","Preencha título e conteúdo.");
         return;
     }
  
@@ -235,6 +272,7 @@ function confirmarNovoPost() {
     postsGlobal.unshift(novoPost);
     criandoNovoPost = false;
     renderizarPosts(1);
+    mostrarToast("success","Post criado com sucesso!");
 }
  
 function cancelarNovoPost() {
