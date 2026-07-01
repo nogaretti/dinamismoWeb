@@ -401,3 +401,12 @@ footer button:active {
 .btn-cancelar:focus-visible::after {
     opacity: 1;
 }
+[id="titulo-novo"]:empty::before {
+    content: 'Título do post';
+    color: #8c8a85;
+}
+
+[id="conteudo-novo"]:empty::before {
+    content: 'Conteúdo do post';
+    color: #8c8a85;
+}
