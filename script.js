@@ -278,4 +278,26 @@ function cancelarNovoPost() {
     if (card) card.remove();
 }
  
+document.addEventListener("keydown", function(evento) {
+    if (evento.key !== "Escape") return;
+
+     if (criandoNovoPost) {
+        cancelarNovoPost();
+    } else if (postEditando !== null) {
+        const botaoAtivo = document.querySelector(".btn-pages.active");
+        const paginaAtual = botaoAtivo ? parseInt(botaoAtivo.textContent) : 1;
+        cancelarAcao(postEditando, paginaAtual);
+    }
+});
+
+document.getElementById("busca").addEventListener("input", function (evento) {
+    termoBusca = evento.target.value;
+    renderizarPosts(1);
+});
+
+document.getElementById("ordenar").addEventListener("change", function (evento) {
+    ordenacaoAtual = evento.target.value;
+    renderizarPosts(1);
+});
+
 buscarPostUsers();
