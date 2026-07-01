@@ -147,13 +147,31 @@ document.getElementById("contadorPosts").textContent = `${listaFiltrada.length} 
 function excluirPost(id, paginaAtual) {
     const resposta = confirm("Você deseja apagar esse post?");
     if (resposta) {
+        ultimoExcluido = postsGlobal.find(post => post.id === id);
         postsGlobal = postsGlobal.filter(
             post => post.id !== id
         );
         renderizarPosts(paginaAtual);
+        mostrarToast(`"${ultimoExcluido.title.slice(0, 30)}..." foi excluído.`, paginaAtual);
     }
 }
+function mostrarToast(texto, paginaAtual) {
+    const toast = document.getElementById("toast");
+    document.getElementById("toast-texto").textContent = texto;
+    toast.classList.remove("oculto");
 
+    clearTimeout(timeoutToast);
+    timeoutToast = setTimeout(() => toast.classList.add("oculto"), 5000);
+
+    document.getElementById("toast-desfazer").onclick = function () {
+        if (ultimoExcluido) {
+            postsGlobal.unshift(ultimoExcluido);
+            ultimoExcluido = null;
+            toast.classList.add("oculto");
+            renderizarPosts(paginaAtual);
+        }
+    };
+}
 function editarPost(id, paginaAtual) {
     postEditando = id;
     renderizarPosts(paginaAtual);
