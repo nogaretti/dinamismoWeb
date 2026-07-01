@@ -434,3 +434,44 @@ footer button:active {
     border-radius: 999px;
     margin-left: 4px;
 }
+.barra-ferramentas {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+}
+
+#busca {
+    flex: 1;
+    min-width: 200px;
+    height: 42px;
+    padding: 0 14px;
+    background: #1c1c1c;
+    border: 1.5px solid #2e2e2e;
+    border-radius: 8px;
+    color: #e8e6e1;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#busca::placeholder {
+    color: #8c8a85;
+}
+
+#busca:focus {
+    border-color: #6b8299;
+}
+
+#ordenar {
+    height: 42px;
+    padding: 0 12px;
+    background: #1c1c1c;
+    border: 1.5px solid #2e2e2e;
+    border-radius: 8px;
+    color: #e8e6e1;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    cursor: pointer;
+}
