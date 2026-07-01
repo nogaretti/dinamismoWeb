@@ -485,3 +485,39 @@ footer button:active {
 #carregando.oculto {
     display: none;
 }
+.toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #242424;
+    border: 1px solid #2e2e2e;
+    color: #e8e6e1;
+    padding: 12px 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 0.875rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    z-index: 200;
+}
+
+.toast.oculto {
+    display: none;
+}
+
+#toast-desfazer {
+    background: #6b8299;
+    color: #131313;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+}
+
+#toast-desfazer:hover {
+    background: #85a0b8;
+}
