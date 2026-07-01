@@ -27,6 +27,18 @@
     </header>
 
     <section class="posts">
+       
+        <div class="barra-ferramentas">
+            <input type="text" id="busca" placeholder="Buscar por título...">
+            <select id="ordenar">
+                <option value="recentes">Mais recentes</option>
+                <option value="antigos">Mais antigos</option>
+                <option value="az">Título A-Z</option>
+            </select>
+        </div>
+
+        <p id="carregando">Carregando posts...</p>
+
         <div id="elemento"></div>
         <script src="script.js"></script>
     </section>
