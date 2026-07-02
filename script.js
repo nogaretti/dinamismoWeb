@@ -10,6 +10,34 @@ let ordenacaoAtual = "recentes";
 let ultimoExcluido = null;
 let timeoutToast = null;
 
+function mostrarToastConfirmacao(tipo, mensagem) {
+    const container = document.getElementById("toast-container");
+
+    let icone = "fa-circle-info";
+    if (tipo === "success") icone = "fa-circle-check";
+    if (tipo === "error") icone = "fa-circle-xmark";
+    if (tipo === "info") icone = "fa-pen";
+
+    const toast = document.createElement("div");
+    toast.className = `toast-item ${tipo}`;
+    toast.innerHTML = `
+        <i class="fa-solid ${icone}"></i>
+        <p>${mensagem}</p>
+        <i class="fa-solid fa-xmark fechar"></i>
+    `;
+
+    container.appendChild(toast);
+    requestAnimationFrame(() => toast.classList.add("show"));
+
+    function fechar() {
+        toast.classList.remove("show");
+        setTimeout(() => toast.remove(), 300);
+    }
+
+    toast.querySelector(".fechar").onclick = fechar;
+    setTimeout(fechar, 3000);
+}
+
 async function buscarRota(url) {
     const res = await fetch(url);
 
@@ -191,15 +219,16 @@ function salvarPost(id, paginaAtual){
     const novoConteudo = document.getElementById(`conteudo-${id}`).textContent;
 
     if (!novoTitulo || !novoConteudo) {
-        alert("Preencha o título e o conteúdo antes de salvar.");
+        mostrarToastConfirmacao("error", "Preencha o título e o conteúdo antes de salvar.");
         return;
     }
-        
+
     post.title = novoTitulo;
     post.body = novoConteudo;
 
     postEditando = null;
     renderizarPosts(paginaAtual);
+    mostrarToastConfirmacao("info", "Post atualizado com sucesso!");
 }
 document.getElementById("novoPost").addEventListener("click", function() {
     if (criandoNovoPost) return;
@@ -253,22 +282,23 @@ function confirmarNovoPost() {
     const userId = parseInt(document.getElementById("opcoesUsuarios").value);
  
     if (!titulo || !conteudo) {
-        alert("Preencha o título e o conteúdo antes de salvar.");
+        mostrarToastConfirmacao("error", "Preencha o título e o conteúdo antes de salvar.");
         return;
     }
- 
+
     const maiorId = postsGlobal.reduce((max, p) => p.id > max ? p.id : max, 0);
- 
+
     const novoPost = {
         id: maiorId + 1,
         userId: userId,
         title: titulo,
         body: conteudo,
     };
- 
+
     postsGlobal.unshift(novoPost);
     criandoNovoPost = false;
     renderizarPosts(1);
+    mostrarToastConfirmacao("success", "Post criado com sucesso!");
 }
  
 function cancelarNovoPost() {
