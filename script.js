@@ -40,8 +40,8 @@ function obterListaFiltrada() {
 
     return lista;
 }
-function atualizarTelas(paginaAtual){
-    const quantidadeTelas = Math.ceil(postsGlobal.length / limite);
+function atualizarTelas(paginaAtual, total){
+    const quantidadeTelas = Math.ceil(total / limite);
     document.getElementById("paginas").innerHTML = ""
     for (let y = 1; y <= quantidadeTelas; y++){
         console.log(y);
@@ -57,14 +57,15 @@ function atualizarTelas(paginaAtual){
 
 function renderizarPosts(paginaAtual) {
     const elemento = document.getElementById("elemento");
+    document.getElementById("carregando").classList.add("oculto");
 
+    const listaFiltrada = obterListaFiltrada();
     let inicio = (paginaAtual - 1) * limite;
     let fim = inicio + limite;
-    let postsRegistrados = 0;
 
     elemento.innerHTML = "";
-    for (inicio; inicio < fim; inicio++) {
-        const post = postsGlobal[inicio];
+    for (let i = inicio; i < fim && i < listaFiltrada.length; i++) {
+        const post = listaFiltrada[i];
 
         const userCarac = usersGlobal.find(
             u => u.id === post.userId
@@ -141,9 +142,8 @@ function renderizarPosts(paginaAtual) {
         }
     }
 
-    atualizarTelas(paginaAtual);
+    atualizarTelas(paginaAtual, listaFiltrada.length);
 }
-document.getElementById("contadorPosts").textContent = `${listaFiltrada.length} posts`;
 function excluirPost(id, paginaAtual) {
     const resposta = confirm("Você deseja apagar esse post?");
     if (resposta) {
@@ -200,7 +200,6 @@ function salvarPost(id, paginaAtual){
 
     postEditando = null;
     renderizarPosts(paginaAtual);
-    }
 }
 document.getElementById("novoPost").addEventListener("click", function() {
     if (criandoNovoPost) return;
